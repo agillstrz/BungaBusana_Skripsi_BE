@@ -28,8 +28,6 @@ return new class extends Migration
             $table->integer('stok')->default(100);
             $table->boolean('status')->default(true);
             $table->timestamps();
-
-
             $table->foreign('kategori_id')->references('id')->on('kategoris')->onDelete('cascade');
         });
     }
