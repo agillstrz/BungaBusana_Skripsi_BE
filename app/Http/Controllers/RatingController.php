@@ -24,9 +24,15 @@ class RatingController extends Controller
   }
     public function addRating(Request $request){
 
-   
       
-      // $check_status = Pemesan::where('user_id', Auth::id())->where('id', $request->pemesan_id)->exists();
+  //  Rating::create([
+  //       'user_id' => Auth::id(),
+  //       'produk_id' => $request->produk_id,
+  //       'komentar' => $request->komentar,
+  //       'rating'=> $request->rating
+  //     ]);
+
+    
       $check_user = Rating::where('user_id', Auth::id())->where('produk_id', $request->produk_id)->exists();
 
       if($check_user){
@@ -35,7 +41,6 @@ class RatingController extends Controller
         ]);
 
       } else{
-
         $rating = Rating::create([
           'user_id' => Auth::id(),
           'produk_id' => $request->produk_id,

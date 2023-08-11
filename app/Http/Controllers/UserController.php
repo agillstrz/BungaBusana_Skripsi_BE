@@ -14,9 +14,6 @@ class UserController extends Controller
 {
     public function produkUser(Request $request){
 
-        // if($request->kategori){
-        // return response()->json('filter kategori');
-        // }
         $produk = Produk::with(['kategori'=> function($query){
             $query->select('id','name');
         }])->when($request->has('search'), function ($query) use ($request) {
@@ -32,7 +29,7 @@ class UserController extends Controller
         $query->where('rating', '=', $request->rating);
     })->
   
-        select('id','nama','foto','deskripsi','rating','harga','kategori_id')->latest()->take($request->limit)->skip($request->skip)->latest()->get();
+        select('id','nama','foto','deskripsi','rating','harga','kategori_id')->latest()->take($request->limit)->skip($request->skip)->get();
         return response()->json([
             'products'=>$produk,
         ]);
@@ -57,6 +54,12 @@ class UserController extends Controller
         $history = Pemesan::where('user_id', Auth::id())->where('status_pembayaran', 1)->latest()->get();
 
         return response()->json(['data' => $history]);
+    }
+
+    public function produkHome(){
+        $produk = Produk::latest()->take(5)->get();
+
+        return response()->json(['data' => $produk]);
      }
 
      

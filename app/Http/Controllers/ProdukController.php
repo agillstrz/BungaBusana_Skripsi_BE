@@ -13,7 +13,6 @@ class ProdukController extends Controller
         $produk = Produk::with(['kategori'=> function($query){
             $query->select('id','name');
         }])->latest()->paginate(10);
-
          return response()->json([
             'data'=>$produk
         ]);

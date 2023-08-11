@@ -90,12 +90,13 @@ Route::get('detailProdukUser/{id}', [UserController::class, 'detailProdukUser'])
 Route::get('checkoutBarang', [UserController::class, 'checkoutBarang'])->middleware('auth:sanctum');
 Route::get('history', [UserController::class, 'historyProduk'])->middleware('auth:sanctum');
 Route::get('detailPesananUser/{id}', [UserController::class, 'detailPesananUser']);
+Route::get('produk-home', [UserController::class, 'produkHome']);
 
 
 
 
 Route::get('/province', function () {
-    $apiKey = 'd17fa0db8c7d24964ec3bbe0b922090b'; // Ganti dengan API key Anda dari Raja Ongkir
+    $apiKey = env('API_RAJA_ONGKIR '); // Ganti dengan API key Anda dari Raja Ongkir
 
     $response = Http::withHeaders([
         'key' => $apiKey,
@@ -106,10 +107,9 @@ Route::get('/province', function () {
 
 
 
-
 Route::get('city', function (Request $request) {
     $provinsi  =  $request->provinsi;
-    $apiKey = 'd17fa0db8c7d24964ec3bbe0b922090b'; // Ganti dengan API key Anda dari Raja Ongkir
+    $apiKey = env('API_RAJA_ONGKIR '); // Ganti dengan API key Anda dari Raja Ongkir
     $response = Http::withHeaders([
         'key' => $apiKey,
     ])->get('https://api.rajaongkir.com/starter/city?province='. $provinsi);

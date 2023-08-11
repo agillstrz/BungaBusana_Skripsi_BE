@@ -17,8 +17,10 @@ class AdminController extends Controller
     }
     public function detailPesananAdmin($id){
         $pesanan = Pesanan::with('produk')->where('pemesan_id', $id)->get();
+        $jml = Pesanan::with('produk')->where('pemesan_id', $id)->count();
         return response()->json([
-            'data' => $pesanan
+            'data' => $pesanan,
+            'jumlah'=> $jml
         ]);
     }
     public function dashboard(){
