@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pesanans', function (Blueprint $table) {
+        Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('produk_id');
             $table->uuid('pemesan_id');
-            $table->integer('jml_pesanan');
-            $table->integer('total_harga');
+            $table->string('tanggal_pemesanan')->nullable();
+            $table->string('status_pembayaran')->default('Pending');
+            $table->boolean('status_pemesanan')->default(false);
+            $table->integer('harga_pesanan');
+            $table->string('metode_pembayaran')->default('BRI');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pesanans');
+        Schema::dropIfExists('transaksis');
     }
 };

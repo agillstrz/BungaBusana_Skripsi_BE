@@ -11,6 +11,7 @@ use App\Http\Controllers\OngkirController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\PredictController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\RajaOngkirController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\RecomendationController;
 use App\Http\Controllers\UserController;
@@ -95,8 +96,11 @@ Route::get('produk-home', [UserController::class, 'produkHome']);
 
 
 
+Route::get('/rajaongkir/provinces', [RajaOngkirController::class, 'getProvinces']);
+
+
 Route::get('/province', function () {
-    $apiKey = env('API_RAJA_ONGKIR '); // Ganti dengan API key Anda dari Raja Ongkir
+    $apiKey = env('API_RAJA_ONGKIR'); // Ganti dengan API key Anda dari Raja Ongkir
 
     $response = Http::withHeaders([
         'key' => $apiKey,
@@ -109,7 +113,7 @@ Route::get('/province', function () {
 
 Route::get('city', function (Request $request) {
     $provinsi  =  $request->provinsi;
-    $apiKey = env('API_RAJA_ONGKIR '); // Ganti dengan API key Anda dari Raja Ongkir
+    $apiKey = env('API_RAJA_ONGKIR'); // Ganti dengan API key Anda dari Raja Ongkir
     $response = Http::withHeaders([
         'key' => $apiKey,
     ])->get('https://api.rajaongkir.com/starter/city?province='. $provinsi);
@@ -124,3 +128,5 @@ Route::get('detailPesananAdmin/{id}', [AdminController::class, 'detailPesananAdm
 Route::get('dashboard', [AdminController::class, 'dashboard'])->middleware('auth:sanctum');
 
 Route::post('midtrans/notif', [HandlePaymentController::class]);
+Route::post('beli', [PesananController::class,'beli'])->middleware('auth:sanctum');
+Route::post('cekBeli', [PesananController::class,'webhook']);

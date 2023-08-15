@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Pemesan;
 use App\Models\Pesanan;
+use App\Models\Produk;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,21 +16,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::create([
-        //     'name' => 'agillstrz',
-        //     'email' => 'agillstrz@gmail.com',
-        //     'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 
-        //     'role' => 1
-        // ]);
-        $data = [2,3,4,5,7];
-        foreach ($data as $key => $item) {
-            Pesanan::create([
-                'pemesan_id'=> 1,
-                'produk_id'=> $item,
-                'jml_pesanan'=> 5,
-                'total_harga'=> 135000,
-            ]);
-        }
+        \App\Models\User::create([
+            'name' => 'agillstrz',
+            'email' => 'agillstrz@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 
+            'role' => 1
+        ]);
+
+   
+        
+        // $data = [2,3,4,5,7];
+        // foreach ($data as $key => $item) [
+        //     Pesanan::create([
+        //         'pemesan_id'=> 1,
+        //         'produk_id'=> $item,
+        //         'jml_pesanan'=> 5,
+        //         'total_harga'=> 135000,
+        //     ]);
+        // }
+
+        
         // Pesanan::create([
         //     'pemesan_id'=> 1,
         //     'produk_id'=> 1,

@@ -24,14 +24,13 @@ class HandlePaymentController extends Controller
         $grossAmount = $payload['gross_amount'];
         $reqSignature = $payload['signature_key'];
 
-        $signature = hash('sha512',$orderId.$statusCode.$grossAmount.config('midtrans.key'));
+        $signature = hash('sha512',$orderId.$statusCode.$grossAmount.env('SERVER_KEY '));
 
         if($signature !== $reqSignature){
             return response()->json([
                 'message' => "invalid signature"
             ],401);
         }
-
 
         $transactionStatus =   $payload['transaction_status'];
 

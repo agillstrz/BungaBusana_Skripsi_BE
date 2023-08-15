@@ -12,20 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pemesans', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->unsignedBigInteger('user_id');
-            $table->string('nama');
+            $table->string('nama_depan');
+            $table->string('nama_belakang');
             $table->string('email');
             $table->string('nohp');
             $table->string('provinsi');
             $table->string('kota');
             $table->string('alamat');
-            $table->string('tanggal_pemesanan')->nullable();
             $table->string('kodepos');
-            $table->boolean('status_pembayaran')->default(false);
-            $table->boolean('status_pemesanan')->default(false);
-            $table->integer('harga_pesanan');
-            $table->string('metode_pembayaran')->default('BRI');
+          
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class UserController extends Controller
 
         $produk = Produk::with(['kategori'=> function($query){
             $query->select('id','name');
-        }])->when($request->has('search'), function ($query) use ($request) {
+        }])->when($request->filled('search'), function ($query) use ($request) {
         $query->where('nama', 'like', '%' . $request->search . '%');
     })->when($request->filled('kategori'), function ($query) use ($request) {
         $query->where('kategori_id', $request->kategori);
@@ -51,7 +51,7 @@ class UserController extends Controller
 
      
     public function historyProduk(){
-        $history = Pemesan::where('user_id', Auth::id())->where('status_pembayaran', 1)->latest()->get();
+        $history = Pemesan::with('transaksi')->where('user_id', Auth::id())->latest()->get();
 
         return response()->json(['data' => $history]);
     }
