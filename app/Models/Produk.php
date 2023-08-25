@@ -15,10 +15,8 @@ public function kategori(){
 }
 
 
-
-
 public function rating()
 {
-    return $this->hasMany(Rating::class);
+    return $this->hasOne(Rating::class);
 }
 }

@@ -7,6 +7,7 @@ use App\Models\Pemesan;
 use App\Models\Pesanan;
 use App\Models\Produk;
 use App\Models\Transaksi;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -123,7 +124,7 @@ class PesananController extends Controller
     public function beli(Request $request)
     {
 
-      
+      $beli = $request->beli;
 
         $this->validate($request, [
             'nama_depan' => "required",
@@ -147,31 +148,55 @@ class PesananController extends Controller
             $pemesan->kota = $request->kota;
             $pemesan->alamat = $request->alamat;
             $pemesan->kodepos = $request->kodepos;
+            $pemesan->catatan = $request->catatan;
             $pemesan->save();
-     
+        
+            $user = User::find(Auth::id());
+            $user->nama_depan = $request->nama_depan;
+            $user->nama_belakang = $request->nama_belakang;
+            $user->provinsi = $request->provinsi;
+            $user->kota = $request->kota;
+            $user->alamat = $request->alamat;
+            $user->kode_pos = $request->kodepos;
+            $user->save();
+            $total = 0;
 
-        $cart =  Cart::where('user_id', Auth::id())->with('produk')->get();
-        $total = 0;
-
-
-        $itemDetails = [];
-
-        foreach ($cart as $item){
-            $total +=  $item->produk->harga * $item->jml_produk;
-          }
-
-        foreach ($cart as $item) {
-             $itemDetails[] = [
-                'price' => $item->produk->harga,
-                'quantity' =>  $item->jml_produk,
-                'name' => $item->produk->nama,
+            
+        if($beli){
+            $itemDetails[] = [
+                'price' => $beli['harga'],
+                'quantity' => 1,
+                'name' => $beli['nama']
             ];
+
+            $total = $beli['harga'];
+
+        } else{
+
+            $cart =  Cart::where('user_id', Auth::id())->with('produk')->get();
+
+            $itemDetails = [];
+    
+            foreach ($cart as $item){
+                $total +=  $item->produk->harga * $item->jml_produk;
+              }
+    
+            foreach ($cart as $item) {
+                 $itemDetails[] = [
+                    'price' => $item->produk->harga,
+                    'quantity' =>  $item->jml_produk,
+                    'name' => $item->produk->nama,
+                ];
+            }
+         
         }
-     
-  
+
+
+
+
+
             $server_key = env('SERVER_KEY');
-            $orderId = Str::uuid()->toString();
-          $response = Http::withBasicAuth($server_key,'')
+            $response = Http::withBasicAuth($server_key,'')
           ->post('https://app.sandbox.midtrans.com/snap/v1/transactions',[
                 'transaction_details' => [
                     "order_id"=> $pemesan->id,
@@ -180,45 +205,55 @@ class PesananController extends Controller
                 'item_details' =>$itemDetails, 
                 "customer_details" => [
                     "first_name" => $request->nama_depan,
-                    "last_name" => $request->belakang,
+                    "last_name" => $request->nama_belakang,
                     "email" => $request->email,
                     "phone" => $request->nohp,
                 ],
-                'enabled_payments' => array('bca_va','bni_va','bri_va')
+                'enabled_payments' => array('bca_va','bni_va','bri_va','dana','gopay')
             ]);
 
-            if ($response->successful()) {
+
+
+          if ($response->successful()) {
            $response = json_decode($response->body());
-
-
-          
-
 
             $transaksi = new Transaksi();
             $transaksi->pemesan_id = $pemesan->id;
             $transaksi->status_pembayaran = 'pending';
+            $transaksi->url_midtrans = $response->redirect_url;
             $transaksi->tanggal_pemesanan = $request->tanggal_pemesanan;
-    
+            
            
             $transaksi->harga_pesanan = $total + $request->harga_ongkir;
             $transaksi->save();
     
-      
-            foreach ($cart as $item) {
+            if($beli){
                 Pesanan::create([
                     'pemesan_id'=> $pemesan->id,
-                    'produk_id'=>$item->produk_id,
-                    'jml_pesanan'=> $item->jml_produk,
-                    'total_harga'=> $item->produk->harga * $item->jml_produk,
+                    'produk_id'=>$beli['id'],
+                    'jml_pesanan'=> 1,
+                    'total_harga'=> $beli['harga'],
                 ]);
-    
-                $produk = Produk::where('id', $item->produk_id)->first();
-                $produk->stok -= $item->jml_produk;
-                $produk->update(); 
+            } else{
+
+                foreach ($cart as $item) {
+                    Pesanan::create([
+                        'pemesan_id'=> $pemesan->id,
+                        'produk_id'=>$item->produk_id,
+                        'jml_pesanan'=> $item->jml_produk,
+                        'total_harga'=> $item->produk->harga * $item->jml_produk,
+                    ]);
+        
+                    $produk = Produk::where('id', $item->produk_id)->first();
+                    $produk->stok -= $item->jml_produk;
+                    $produk->update(); 
+                }
+        
+                $cart = Cart::where('user_id', Auth::id())->get();
+                Cart::destroy($cart);
+
             }
-    
-            $cart = Cart::where('user_id', Auth::id())->get();
-            Cart::destroy($cart);
+      
 
             return response()->json($response);
 
@@ -226,10 +261,10 @@ class PesananController extends Controller
             } else {
                 // The response is not successful, handle the error here
                 $response = json_decode($response->body());
+             
                 return response()->json($response);
                 // Perform error handling, logging, or other appropriate actions
             }
-           
           
     }
     // public function beli(Request $request)
@@ -298,24 +333,27 @@ class PesananController extends Controller
       $response =   Http::withBasicAuth($server_key,'')->get('https://api.sandbox.midtrans.com/v2/'.$request->order_id.'/status');
 
       $response = json_decode($response->body());
-      
-
-      //cek db
 
       $transaksi = Transaksi::where('pemesan_id', $response->order_id)->first();
-        $transaksi->metode_pembayaran = $response->payment_type . " " . $response->va_numbers[0]->bank;
-      if($transaksi->status_pembayaran == 'berhasil'){
+      $transaksi->metode_pembayaran = $response->payment_type . " " . $response->va_numbers[0]->bank;
+      $transaksi->tanggal_pemesanan = $response->transaction_time;
+     
 
+      if($transaksi->status_pembayaran == 'berhasil'){
         return response()->json('Pembayaran sedang diproses');
       }
+      
       if($response->transaction_status == 'capture'){
         $transaksi->status_pembayaran = "Berhasil";
+        $transaksi->status_pemesanan = "Menunggu Kurir";
       }
       else if($response->transaction_status == 'settlement'){
         $transaksi->status_pembayaran = "Berhasil";
+        $transaksi->status_pemesanan = "Menunggu Kurir";
+   
       }
       else if($response->transaction_status == 'pending'){
-        $transaksi->status_pembayaran = "menunggu";
+        $transaksi->status_pembayaran = "pending";
       }
       else if($response->transaction_status == 'deny'){
         $transaksi->status_pembayaran = "gagal";
@@ -323,10 +361,10 @@ class PesananController extends Controller
       else if($response->transaction_status == 'expire'){
         $transaksi->status_pembayaran = "kedaluwarsa";
       }
-
+  
       $transaksi->save();
 
-      return response('sukses');
+      return response()->json('sukses');
     }
 
     /**

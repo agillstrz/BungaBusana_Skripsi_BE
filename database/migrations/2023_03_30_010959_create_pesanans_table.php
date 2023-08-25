@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('jml_pesanan');
             $table->integer('total_harga');
             $table->timestamps();
+
+            $table->foreign('pemesan_id')->references('id')->on('pemesans')->onDelete('cascade');
         });
     }
 

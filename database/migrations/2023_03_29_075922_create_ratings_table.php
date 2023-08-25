@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('rating')->default(0);
-            $table->string('komentar')->nullable();
+            $table->longText('komentar')->nullable();
             $table->unsignedBigInteger('produk_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

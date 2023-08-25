@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('transaksis', function (Blueprint $table) {
             $table->id();
             $table->uuid('pemesan_id');
-            $table->string('tanggal_pemesanan')->nullable();
+            $table->string('tanggal_pemesanan')->default('menunggu');
             $table->string('status_pembayaran')->default('Pending');
-            $table->boolean('status_pemesanan')->default(false);
+            $table->string('status_pemesanan')->default('Pending');
             $table->integer('harga_pesanan');
-            $table->string('metode_pembayaran')->default('BRI');
+            $table->string('metode_pembayaran')->default('menunggu');
+            $table->string('url_midtrans')->nullable();
             $table->timestamps();
+            $table->foreign('pemesan_id')->references('id')->on('pemesans')->onDelete('cascade');
         });
     }
 

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class CartController extends Controller
 {
@@ -24,13 +26,19 @@ class CartController extends Controller
     {
 
     $check_produk = Cart::where('produk_id', $request->produk_id)->where('user_id', Auth::id())->exists();
-    
+    $produk = Produk::find($request->produk_id);
     if(Auth::check()){
         if($check_produk){
-            return response()->json([
-                'message' => "Produk sudah ada dalam keranjang"
+            throw ValidationException::withMessages([
+                'produk' => ["Produk sudah ada dalam keranjang"]
             ]);
-        } else{
+        } 
+        else if($produk->stok <= 0 || $produk->status == 0){
+            throw ValidationException::withMessages([
+                'produk' => ["Produk kosong"]
+            ]);
+        }
+        else{
     
             $cart = Cart::create([
                 'produk_id' => $request->produk_id,
@@ -40,7 +48,7 @@ class CartController extends Controller
         
                return response()->json([
                 'data'=> $cart,
-                'message' => "menambahkan produk kedalam keranjang",
+                'message' => "berhasil menambahkan produk kedalam keranjang",
                ]);
     
         }

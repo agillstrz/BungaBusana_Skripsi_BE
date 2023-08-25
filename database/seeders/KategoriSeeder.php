@@ -16,11 +16,11 @@ class KategoriSeeder extends Seeder
         $data= [
             [
               "name"=> "Kaos",
-              "image"=> "https://images.tokopedia.net/img/cache/900/hDjmkQ/2023/5/7/e4115cc4-8ac6-4580-9592-da24465824a0.jpg"
+              "image"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/12/8/b7516647-ba50-44c0-847c-ae2880090776.jpg"
             ],
             [
                 "name"=> "Blazer",
-                "image"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2023/2/19/24e06a99-1210-4e70-a270-d85f9a0ac24c.jpg"
+                "image"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/4/5/40270242-8640-4dd9-900b-7dd2e9a37c20.jpg"
             ],
             [
                 "name"=> "Kemeja",
@@ -32,15 +32,15 @@ class KategoriSeeder extends Seeder
             ],
             [
                 "name"=> "Blus",
-                "image"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2023/7/24/b1f443c7-d9f2-40cd-ba46-ffff1f392b04.jpg"
+                "image"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/8/23/f6b88f6d-f8c7-4b6b-b527-85d5927f5e4d.jpg"
             ],
             [
                 "name"=> "Pakaian tidur",
-                "image"=> "https://images.tokopedia.net/img/cache/900/hDjmkQ/2022/11/15/a3781130-5149-443c-9ae1-0ba04c6f231a.jpg"
+                "image"=> "https://images.tokopedia.net/img/cache/900/hDjmkQ/2022/11/15/a3781130-5149-443c-9ae1-0ba04c6f231a.jpghttps://images.tokopedia.net/img/cache/900/VqbcmM/2022/12/13/d59ea7df-5eb9-4f57-adbb-c6986ef950c8.jpg"
             ],
             [
                 "name"=> "Hoodie",
-                "image"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2020/9/28/f157c904-2c51-46b0-b299-96ef18efb9b2.jpg"
+                "image"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2020/9/28/18c02e74-5af4-47a3-a81c-e7cb1aaf4086.jpg"
             ],
         ];
 

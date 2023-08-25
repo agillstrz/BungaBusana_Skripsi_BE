@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('rating')->default(0);
             $table->string('nama');
             $table->longText('deskripsi');
+            $table->string('jenis')->default('wanita');
             $table->integer('harga');
             $table->string('foto');
             $table->string('foto2')->nullable();

@@ -13,33 +13,33 @@ class ProdukSeeder extends Seeder
      */
     public function run(): void
     {
-        $data= [
+           $data= [
             [
               "kategori"=> 1,
-              "harga" => 125000,
-              "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/11/16/c7daff31-6211-4bf0-88bc-64e64a658a69.jpg",
-              "nama"=> "Kaos",
-              "deskripsi"=> "Occlusion of Middle Colic Artery with Extraluminal Device, Percutaneous Approach"
+              "harga" => 45000,
+              "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/10/6/84a9d7d1-a006-4f71-89a1-4a574c7cd84e.jpg",
+              "nama"=> "Daster Longdress Lengan Panjang",
+              "deskripsi"=> "Daster Longdress Lengan Panjang"
             ],
             [
                 "kategori"=> 3,
-                "harga" => 125000,
-                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/6/30/b895cf09-f2f0-4b04-8527-61f285bf03a0.jpg",
-                "nama"=> "Mickout Casual Shirt Scientific White - M",
-                "deskripsi"=> "Restriction of Middle Esophagus, Via Natural or Artificial Opening"
+                "harga" => 98000,
+                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2021/3/20/fdf60353-58d3-402b-ac64-191cb2d72446.png",
+                "nama"=> "KEMEJA LENGAN PANJANG SLIMFIT",
+                "deskripsi"=> "Ciptakan tampilan santai yang tetap keren dengan Kemeja Kasual kami yang baru ini. Dibuat dengan perpaduan sempurna antara gaya dan kenyamanan, kemeja ini akan menjadi tambahan yang sempurna untuk koleksi pakaian kasual Anda"
             ],
             [
                 "kategori"=> 3,
                 "harga" => 125000,
                 "foto"=> "https://images.tokopedia.net/img/cache/900/product-1/2020/9/8/12805457/12805457_7fbe4712-fcf0-47c8-a8f9-1096c2b41be9_1018_1018",
-                "nama"=> "kemeja PUTIH polos pria lengan panjang",
+                "nama"=> "kemeja PUTIH polos lengan panjang",
                 "deskripsi"=> "Restriction of Middle Esophagus, Via Natural or Artificial Opening"
             ],
             [
                 "kategori"=> 6,
-                "harga" => 125000,
-                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/3/8/3018642f-58f1-4a17-a339-505c4bb22d14.jpg",
-                "nama"=> "BAJU TIDUR WANITA | PIYAMA - GOOD NIGHT",
+                "harga" => 55000,
+                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/6/17/3eadd429-c92b-4d9e-8971-0c748c2d0332.jpg",
+                "nama"=> "Baju Tidur Piyama Wanita Katun",
                 "deskripsi"=> "Restriction of Middle Esophagus, Via Natural or Artificial Opening"
             ],
             [
@@ -66,15 +66,18 @@ class ProdukSeeder extends Seeder
             [
                 "kategori"=> 5,
                 "harga" => 125000,
-                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/11/18/c09d151c-cb5c-4f95-bf98-8de2d142fe0b.jpg",
-                "nama"=> "Blouse korea wanita",
-                "deskripsi"=> "Restriction of Middle Esophagus, Via Natural or Artificial Opening"
+                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2023/6/12/4be2fc74-3c24-4316-9485-5eaaeaf3571f.jpg",
+                "nama"=> "Wulfi Atasan Kemeja Casual Shirt MintSage",
+                "deskripsi"=> "Atasan kemeja bahan anti kusut dan gampang kering
+                Kerah koko yang nyaman, kancing dari atas full sampai bawah sehingga juga busui friendly.
+                Cutting membuat badan terlihat lebih ramping.
+                Menggunakan bahan yang dirakit sendiri sehingga adem dan nyaman untuk kegiatan sehari-hari."
             ],
             [
                 "kategori"=> 3,
-                "harga" => 125000,
-                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/10/13/bc850aef-647d-4b5b-9781-965dcbc98f86.png",
-                "nama"=> "Zianna Top - Blus Kemeja Wanita ",
+                "harga" => 155000,
+                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2023/3/10/00519f5f-8a06-4572-9926-2b72519bdea3.jpg",
+                "nama"=> "Enzy Basic Kemeja Pria Oxford Lengan Pendek -Navy - S ",
                 "deskripsi"=> "Restriction of Middle Esophagus, Via Natural or Artificial Opening"
             ],
             [
@@ -86,19 +89,66 @@ class ProdukSeeder extends Seeder
             ],
             [
                 "kategori"=> 7,
-                "harga" => 125000,
-                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/7/2/2e1f3d35-1e77-4a3c-8f14-53f702cb3c53.jpg",
-                "nama"=> "Hoodie Panjang Light Brown 2197A",
+                "harga" => 135000,
+                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/12/2/64480794-792d-4fb6-84c9-6c0a66ec825f.jpg",
+                "nama"=> "Kemeja Katun Wanita Lengan Panjang",
                 "deskripsi"=> "Restriction of Middle Esophagus, Via Natural or Artificial Opening"
             ],
             [
+                "kategori"=> 7,
+                "harga" => 83000,
+                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2023/2/17/1613704e-41b4-423e-8e19-91c5bd969f00.jpg",
+                "nama"=> "Kemeja Batik Pria Slim Fit Lengan Pendek Cotton",
+                "deskripsi"=> "Bahan cotton Stretch tebal, lembut, halus, tentunya adem dan nyaman di pakai"
+            ],
+            [
+                "kategori"=> 7,
+                "harga" => 83000,
+                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/7/5/a45a9b05-343a-4693-afdc-77de120407ec.jpg",
+                "nama"=> "BAJU KEMEJA BATIK PRIA LENGAN PANJANG FURING KATUN",
+                "deskripsi"=> "Bahan cotton Stretch tebal, lembut, halus, tentunya adem dan nyaman di pakai"
+            ],
+            [
                 "kategori"=>7,
-                "harga" => 125000,
-                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2023/2/23/28dc61dc-4ecc-4874-8135-282612d9285b.jpg",
-                "nama"=> "Jaket Pria Jaket Parasut",
+                "harga" => 89000,
+                "foto"=> "https://images.tokopedia.net/img/cache/900/VqbcmM/2022/11/21/b8e0026d-ecb5-48ea-a974-3a6da09d149c.jpg",
+                "nama"=> "Mukena Dewasa Siti Khadijah Katun",
                 "deskripsi"=> "Restriction of Middle Esophagus, Via Natural or Artificial Opening"
             ],
         ];
+
+        // $data= [
+        //     [
+        //         "kategori"=> 3,
+        //         "harga" => 85000,
+        //         "foto"=> "https://down-id.img.susercontent.com/file/f3bd36b70bf7e900c0adc1605370806e",
+        //         "nama"=> "HOODIE ZIPER SWEATER UNISEX",
+        //         "deskripsi"=> "Sweater yang cocok untuk sista yang selalu mengikuti trend kekinian dan juga fashionable
+        //         karna bahan lembut juga tidak mudah kusut tentunya menambah kesan rapi"
+        //     ],
+        //     [
+        //         "kategori"=> 7,
+        //         "harga" => 125000,
+        //         "foto"=> "https://down-id.img.susercontent.com/file/id-11134201-7qul5-ljqdlm6x9j4r5f",
+        //         "nama"=> "Baju Tidur Wanita Dewasa Oversize Piyama",
+        //         "deskripsi"=> ""
+        //     ],
+        //     [
+        //         "kategori"=> 7,
+        //         "harga" => 90000,
+        //         "foto"=> "https://down-id.img.susercontent.com/file/11fc949777e098395cc3de351d4e295d",
+        //         "nama"=> "Baju Kaos Distro Lengan Pendek Original",
+        //         "deskripsi"=> "Kaos Distro Lengan Pendek by DIKLINE"
+        //     ],
+        //     [
+        //         "kategori"=>7,
+        //         "harga" => 175000,
+        //         "foto"=> "https://down-id.img.susercontent.com/file/11a398a5e9ed53b0b8ca10838d1525f7_tn",
+        //         "nama"=> " Dexy Loose Oversize Shirt",
+        //         "deskripsi"=> "Dexy Loose Oversize Shirt Bahan Katun Poly Fit L"
+        //     ],
+        // ];
+     
 
         foreach ($data as $item) {
             Produk::create([

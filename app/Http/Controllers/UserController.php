@@ -27,9 +27,11 @@ class UserController extends Controller
         $query->where('harga', '<=', $request->harga_max);
     })->when($request->filled('rating'), function ($query) use ($request) {
         $query->where('rating', '=', $request->rating);
+    })->when($request->filled('jenis'), function ($query) use ($request) {
+        $query->where('jenis', '=', $request->jenis);
     })->
   
-        select('id','nama','foto','deskripsi','rating','harga','kategori_id')->latest()->take($request->limit)->skip($request->skip)->get();
+        select('id','nama','foto','deskripsi','rating','harga','kategori_id','stok','status','jenis')->latest()->paginate(26);
         return response()->json([
             'products'=>$produk,
         ]);
@@ -64,7 +66,11 @@ class UserController extends Controller
 
      
     public function detailPesananUser($id){
-        $produk = Pesanan::with('produk')->where('pemesan_id', $id)->get();
+        $produk = Pesanan::with(['produk' => function ($query){
+            $query->with(['rating' => function ($query){
+                $query->where('user_id', 1);
+            }]);
+        }])->where('pemesan_id', $id)->get();
 
         return response()->json(['data' => $produk]);
      }
@@ -74,11 +80,13 @@ class UserController extends Controller
         $ulasan = Rating::with(['user'=> function($query){
             $query->select('id','name');
         }])->where('produk_id', $id)->get();
-  
-
+        $rating = Rating::where('produk_id', $id)->count();
+        $jml_pembelian =  Pesanan::where('produk_id', $id)->sum('jml_pesanan');
         return response()->json([
             'produk' => $produk,
-            'ulasan' => $ulasan
+            'ulasan' => $ulasan,
+            'rating' => $rating,
+            'jml_pembelian' => $jml_pembelian 
         ]);
      }
 }

@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('nohp');
             $table->string('provinsi');
             $table->string('kota');
-            $table->string('alamat');
+            $table->longText('alamat');
             $table->string('kodepos');
-          
+            $table->longText('catatan')->nullable();
             $table->timestamps();
         });
     }

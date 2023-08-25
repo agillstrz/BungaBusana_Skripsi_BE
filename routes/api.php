@@ -56,8 +56,10 @@ Route::delete('kategori/{id}', [KategoriController::class, 'deleteKategori']);
 
 //Rating 
 Route::post('rating', [RatingController::class, 'addRating'])->middleware('auth:sanctum');
-Route::post('rating/{productId}', [RatingController::class, 'recommendProducts'])->middleware('auth:sanctum');
+Route::post('rating/{productId}', [RatingController::class, 'rekomendasi'])->middleware('auth:sanctum');
+Route::get('rekomendasiProduk', [RatingController::class, 'recommendProducts']);
 Route::get('rating/{id}', [RatingController::class, 'index']);
+
 // Route::post('rating', [RatingController::class, 'index'])->middleware('auth:sanctum');
 
 
@@ -126,6 +128,7 @@ Route::get('city', function (Request $request) {
 Route::get('listPemesan', [AdminController::class, 'pemesan']);
 Route::get('detailPesananAdmin/{id}', [AdminController::class, 'detailPesananAdmin']);
 Route::get('dashboard', [AdminController::class, 'dashboard'])->middleware('auth:sanctum');
+Route::get('pengguna', [AdminController::class, 'pengguna'])->middleware('auth:sanctum');
 
 Route::post('midtrans/notif', [HandlePaymentController::class]);
 Route::post('beli', [PesananController::class,'beli'])->middleware('auth:sanctum');

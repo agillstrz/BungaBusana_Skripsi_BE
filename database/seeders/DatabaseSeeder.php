@@ -22,6 +22,30 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 
             'role' => 1
         ]);
+        \App\Models\User::create([
+            'name' => 'aulia',
+            'email' => 'aulia@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 
+            'role' => 0
+        ]);
+        \App\Models\User::create([
+            'name' => 'reza',
+            'email' => 'reza@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 
+            'role' => 0
+        ]);
+        \App\Models\User::create([
+            'name' => 'nanda',
+            'email' => 'nanda@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 
+            'role' => 0
+        ]);
+        \App\Models\User::create([
+            'name' => 'kuze',
+            'email' => 'kuze@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 
+            'role' => 0
+        ]);
 
    
         
