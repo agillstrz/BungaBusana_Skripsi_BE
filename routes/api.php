@@ -129,6 +129,7 @@ Route::get('listPemesan', [AdminController::class, 'pemesan']);
 Route::get('detailPesananAdmin/{id}', [AdminController::class, 'detailPesananAdmin']);
 Route::get('dashboard', [AdminController::class, 'dashboard'])->middleware('auth:sanctum');
 Route::get('pengguna', [AdminController::class, 'pengguna'])->middleware('auth:sanctum');
+Route::put('updatePesanan/{id}', [AdminController::class, 'updatePesanan'])->middleware('auth:sanctum');
 
 Route::post('midtrans/notif', [HandlePaymentController::class]);
 Route::post('beli', [PesananController::class,'beli'])->middleware('auth:sanctum');

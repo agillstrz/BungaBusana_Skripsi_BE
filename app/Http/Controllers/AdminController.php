@@ -39,6 +39,20 @@ class AdminController extends Controller
             'jumlah'=> $jml
         ]);
     }
+
+    public function updatePesanan(Request $request, $id){
+        $transaksi = Transaksi::where('pemesan_id', $id)->first();
+     
+        $transaksi->status_pemesanan = $request->pemesan;
+        $transaksi->save();
+        return response()->json([
+            'data' => $transaksi,
+            'message' => "berhasil"
+         
+        ]);
+    }
+
+
     public function dashboard(){
         $me = User::find(Auth::id());
         $produk_terjual = Pesanan::count();

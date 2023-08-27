@@ -192,9 +192,6 @@ class PesananController extends Controller
         }
 
 
-
-
-
             $server_key = env('SERVER_KEY');
             $response = Http::withBasicAuth($server_key,'')
           ->post('https://app.sandbox.midtrans.com/snap/v1/transactions',[

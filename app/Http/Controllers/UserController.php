@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function produkUser(Request $request){
 
-        $produk = Produk::with(['kategori'=> function($query){
+    $produk = Produk::with(['kategori'=> function($query){
             $query->select('id','name');
         }])->when($request->filled('search'), function ($query) use ($request) {
         $query->where('nama', 'like', '%' . $request->search . '%');
@@ -26,7 +26,7 @@ class UserController extends Controller
     ->when($request->filled('harga_max'), function ($query) use ($request) {
         $query->where('harga', '<=', $request->harga_max);
     })->when($request->filled('rating'), function ($query) use ($request) {
-        $query->where('rating', '=', $request->rating);
+        $query->where('rating', '<=', $request->rating);
     })->when($request->filled('jenis'), function ($query) use ($request) {
         $query->where('jenis', '=', $request->jenis);
     })->

@@ -49,7 +49,6 @@ class RatingController extends Controller
           'rating'=> $request->rating
         ]);
 
-        
         $produk = Produk::find($request->produk_id);
       
         $produkRating = Rating::where('produk_id', $request->produk_id)->avg('rating');
